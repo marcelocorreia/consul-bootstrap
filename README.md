@@ -1,4 +1,4 @@
-#Consul Bootstrap
+# consul-bootstrap
 
 
 Variables
