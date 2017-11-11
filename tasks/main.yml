@@ -1,0 +1,61 @@
+---
+- name: Creates consul directory
+  file:
+    path: "{{consul.config_dir}}"
+    owner: root
+    group: root
+    state: directory
+
+- name: Systemd Consul Server Service
+  template:
+    src: consul-server.service.j2
+    dest: "{{systemd.path}}/consul.service"
+    mode: 0644
+  when:
+    - consul.agent_mode == "server"
+
+- name: Systemd Consul Client Service
+  template:
+    src: consul-client.service.j2
+    dest: "{{systemd.path}}/consul.service"
+    mode: 0644
+  when:
+    - consul.agent_mode == "client"
+
+- name: Consul dnsmasq config
+  template:
+    src: 10-consul.j2
+    dest: "{{dnsmasq.path}}/10-consul"
+    mode: 0644
+
+- name: dnsmasq restarts
+  service:
+    name: dnsmasq
+    state: restarted
+
+- name: Consul as service
+  service:
+    name: consul
+    enabled: yes
+    state: started
+  ignore_errors: true
+
+- name: Wait for Consul to come up...
+  command: sleep 2
+  when:
+    - consul.agent_mode == "server"
+
+- name: Setup NGINX
+  template:
+    src: nginx-consul.j2
+    dest: "/etc/nginx/sites-enabled/consul"
+    mode: 0644
+  when:
+    - consul.agent_mode == "server"
+
+- name: Restarts NGINX
+  service:
+    name: nginx
+    state: restarted
+  when:
+    - consul.agent_mode == "server"
