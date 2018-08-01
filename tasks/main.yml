@@ -34,7 +34,7 @@
   command: sleep 2
 
 - name: Setup NGINX
-  template:
+  copy:
     src: nginx-consul
     dest: "/etc/nginx/sites-enabled/consul"
     mode: 0644
