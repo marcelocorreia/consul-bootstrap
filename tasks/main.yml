@@ -7,24 +7,14 @@
     state: directory
 
 - name: Systemd Consul Server Service
-  template:
-    src: consul-server.service.j2
+  copy:
+    src: consul.service
     dest: "{{systemd.path}}/consul.service"
     mode: 0644
-  when:
-    - consul.agent_mode == "server"
 
-- name: Systemd Consul Client Service
+- copy: Consul dnsmasq config
   template:
-    src: consul-client.service.j2
-    dest: "{{systemd.path}}/consul.service"
-    mode: 0644
-  when:
-    - consul.agent_mode == "client"
-
-- name: Consul dnsmasq config
-  template:
-    src: 10-consul.j2
+    src: 10-consul
     dest: "{{dnsmasq.path}}/10-consul"
     mode: 0644
 
@@ -42,20 +32,14 @@
 
 - name: Wait for Consul to come up...
   command: sleep 2
-  when:
-    - consul.agent_mode == "server"
 
 - name: Setup NGINX
   template:
-    src: nginx-consul.j2
+    src: nginx-consul
     dest: "/etc/nginx/sites-enabled/consul"
     mode: 0644
-  when:
-    - consul.agent_mode == "server"
 
 - name: Restarts NGINX
   service:
     name: nginx
     state: restarted
-  when:
-    - consul.agent_mode == "server"

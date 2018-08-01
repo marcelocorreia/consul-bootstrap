@@ -11,4 +11,3 @@ consul:
   iface: "{{ consul_iface | default('eth0') }}"
   aws_region: "{{ consul_aws_region | default('ap-southeast-2') }}"
   agent_mode: "{{ consul_agent_mode | default('client') }}"
-  join_tag: "{{consul_join_tag | default('CHANGE_ME_SOMETHING_WENT_WRONG')}}"
