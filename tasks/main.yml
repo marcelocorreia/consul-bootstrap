@@ -8,7 +8,7 @@
 
 - name: Systemd Consul Server Service Template
   copy:
-    src: consul.service
+    src: consul-service
     dest: "{{systemd.path}}/consul.service.tpl"
     mode: 0644
 
