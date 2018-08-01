@@ -5,5 +5,6 @@ dnsmasq:
   path: "{{ dnsmasq_path | default('/etc/dnsmasq.d') }}"
 
 consul:
-  config_dir: "{{ consul_config_dir | default('/etc/consul.d') }}"
+  config_dir: "/etc/consul.d"
+  data_dir: "/var/consul/data"
 

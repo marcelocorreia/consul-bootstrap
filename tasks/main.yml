@@ -6,6 +6,13 @@
     group: root
     state: directory
 
+- name: Creates consul directory
+  file:
+    path: "{{consul.dir}}"
+    owner: root
+    group: root
+    state: directory
+
 - name: Systemd Consul Server Service Template
   copy:
     src: consul-service
