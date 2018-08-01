@@ -12,8 +12,8 @@
     dest: "{{systemd.path}}/consul.service"
     mode: 0644
 
-- copy: Consul dnsmasq config
-  template:
+- name: Consul dnsmasq config
+  copy:
     src: 10-consul
     dest: "{{dnsmasq.path}}/10-consul"
     mode: 0644
