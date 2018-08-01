@@ -6,10 +6,10 @@
     group: root
     state: directory
 
-- name: Systemd Consul Server Service
+- name: Systemd Consul Server Service Template
   copy:
     src: consul.service
-    dest: "{{systemd.path}}/consul.service"
+    dest: "{{systemd.path}}/consul.service.tpl"
     mode: 0644
 
 - name: Consul dnsmasq config
