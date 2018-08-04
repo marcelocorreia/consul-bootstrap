@@ -6,9 +6,8 @@ After=network-online.target private-ip.service
 [Service]
 Type=idle
 EnvironmentFile=-/etc/default/private-ip
-EnvironmentFile=-/etc/default/consul_base
 Environment=GOMAXPROCS=2
-ExecStart={{consul.start_command}}
+ExecStart=/usr/local/bin/consul agent {{consul.agent_mode}} -datacenter {{consul.datacenter}} -config-dir {{consul.config_dir}} -data-dir /var/consul/data/ -bind ${PRIVATE_IP} -bootstrap-expect {{consul.bootstrap_expect}} -retry-join 'provider=aws tag_key=consul-join tag_value={{consul.join_tag}}'
 Requires=network-online.target
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure

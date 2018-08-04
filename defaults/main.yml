@@ -6,4 +6,4 @@ dnsmasq:
 consul:
   config_dir: "/etc/consul.d"
   data_dir: "/var/consul/data"
-  start_command:
+
