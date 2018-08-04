@@ -3,8 +3,7 @@ systemd:
   path: "{{ systemd_path | default('/lib/systemd/system') }}"
 dnsmasq:
   path: "{{ dnsmasq_path | default('/etc/dnsmasq.d') }}"
-
 consul:
   config_dir: "/etc/consul.d"
   data_dir: "/var/consul/data"
-
+  start_command:

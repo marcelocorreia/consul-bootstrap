@@ -8,7 +8,7 @@ Type=idle
 EnvironmentFile=-/etc/default/private-ip
 EnvironmentFile=-/etc/default/consul_base
 Environment=GOMAXPROCS=2
-ExecStart={{.consul_start_command}}
+ExecStart={{consul.start_command}}
 Requires=network-online.target
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=on-failure
