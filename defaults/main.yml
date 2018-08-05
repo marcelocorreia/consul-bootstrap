@@ -4,6 +4,9 @@ systemd:
 dnsmasq:
   path: "{{ dnsmasq_path | default('/etc/dnsmasq.d') }}"
 consul:
-  config_dir: "/etc/consul.d"
-  data_dir: "/var/consul/data"
-
+  config_dir: "{{ consul_config_dir | default('/etc/consul.d') }}"
+  data_dir: "{{ consul_data_dir | default('/var/consul/data') }}"
+  agent_mode: "{{ consul_agent_mode | default('') }}"
+  datacenter: "{{ consul_datacenter | default('dc1') }}"
+  bootstrap_expect: "{{ consul_bootstrap_expect | default('1') }}"
+  join_tag: "{{ consul_join_tag | default('consul-server') }}"

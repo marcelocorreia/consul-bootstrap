@@ -16,7 +16,7 @@
 - name: Systemd Consul Server Service Template
   template:
     src: consul.service.j2
-    dest: "{{systemd.path}}/consul.service.tpl"
+    dest: "{{systemd.path}}/consul.service"
     mode: 0644
 
 - name: Consul dnsmasq config
