@@ -9,4 +9,5 @@ consul:
   agent_mode: "{{ consul_agent_mode | default('') }}"
   datacenter: "{{ consul_datacenter | default('dc1') }}"
   bootstrap_expect: "{{ consul_bootstrap_expect | default('1') }}"
-  join_tag: "{{ consul_join_tag | default('consul-server') }}"
+  join_tag_key: "{{ consul_join_tag_key | default('Service') }}"
+  join_tag_value: "{{ consul_join_tag_value | default('consul-server') }}"
