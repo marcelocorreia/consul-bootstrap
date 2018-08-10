@@ -14,8 +14,8 @@
     state: directory
 
 - name: Systemd Consul Server Service Template
-  template:
-    src: consul.service.j2
+  copy:
+    src: consul.service
     dest: "{{systemd.path}}/consul.service"
     mode: 0644
 
